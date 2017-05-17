@@ -1,6 +1,6 @@
 <?php
 
-echo "Bonjour";
+echo "Bonjour à tous";
 echo "<p>Au revoir</p>";
 echo "<ul><li>Pomme</li>";
 echo "<li>Mangue</li></ul>";
