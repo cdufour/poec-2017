@@ -1,4 +1,6 @@
 <?php
+include 'includes/header.php';
+include 'includes/menu.php';
 
 // *** boucles ***
 // FOR
@@ -52,4 +54,5 @@ echo '<script src="js/script.js"></script>';
 // Afficher deux autres photos d'animaux au choix
 // Afficher une bordure colorée autour de toutes les images
 
+include 'includes/footer.php';
 ?>
