@@ -8,14 +8,17 @@
 
 <!-- Formulaire de connexion -->
 <?php if ($connected): ?>
-<form>
+<form action="post.php" method="POST">
     <label>Email: </label>
-    <input type="email" placeholder="Tapez votre email">
+    <input name="email" type="email" placeholder="Tapez votre email">
 
     <label>Mot de passe: </label>
-    <input type="password" placeholder="Tapez votre mot de passe">
+    <input name="pass" type="password" placeholder="Tapez votre mot de passe">
 
-    <button>Valider</button>
+    <label>Administrateur</label>
+    <input type="checkbox" name="admin">
+
+    <input type="submit" value="Valider">
 </form>
 <?php endif ?>
 
