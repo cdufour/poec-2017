@@ -1,0 +1,5 @@
+Modifier la page AddPlayer.php de manière à pouvoir
+renseigner numero de maillot des prochains joueurs ajoutés
+
+Afficher le numéro de maillot entre parenthèses sur la page
+joueurs.php sauf si aucun numéro n'a été défini (éviter d'afficher "(0)")

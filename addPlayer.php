@@ -11,13 +11,14 @@ if (isset($_POST['input'])) {
 
     // 2) requête
     $query = $db->prepare(
-        'INSERT INTO joueur (nom, prenom, age) VALUES (:nom, :prenom, :age)');
+        'INSERT INTO joueur (nom, prenom, age, numero_maillot) VALUES (:nom, :prenom, :age, :numero_maillot)');
 
     // 3) execution
     $query->execute(array(
-        'nom' => $_POST['nom'],
-        'prenom' => $_POST['prenom'],
-        'age' => $_POST['age']
+        ':nom' => $_POST['nom'],
+        ':prenom' => $_POST['prenom'],
+        ':age' => $_POST['age'],
+        ':numero_maillot' => $_POST['numero_maillot']
     ));
 
 } else {
@@ -37,6 +38,16 @@ if (isset($_POST['input'])) {
 
     <label>Age</label>
     <input type="text" name="age">
+
+    <label>Numéro de maillot</label>
+    <!--<input type="text" name="numero_maillot">-->
+    <select name="numero_maillot">
+        <?php 
+            for ($i=1; $i<1000; $i++) {
+                echo '<option value="'.$i.'">'.$i.'</option>';
+            }
+        ?>
+    </select>
 
     <input type="submit" name="input" value="Enregistrer">
 </form>

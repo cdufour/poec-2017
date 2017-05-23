@@ -4,7 +4,9 @@ $menus = [
     ['href' => 'variables.php', 'label' => 'Variables'],
     ['href' => 'boucles.php', 'label' => 'Boucles'],
     ['href' => 'fonctions.php', 'label' => 'Fonctions'],
-    ['href' => 'get.php?country=maroc&sport=football', 'label' => 'GET']
+    ['href' => 'get.php?country=maroc&sport=football', 'label' => 'GET'],
+    ['href' => 'joueurs.php', 'label' => 'Joueurs'],
+    ['href' => 'addPlayer.php', 'label' => 'Ajouter un joueur']
 ];
 ?>
 <nav>

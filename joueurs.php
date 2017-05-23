@@ -65,7 +65,26 @@ $query->execute(); // execute() renvoie vrai si réussite
    while ($joueur = $query->fetch()) {
     // à chaque itération la variable $joueur reçoit le résultat de fetch()
     // c'est-à-dire un tableau associatif contenant les données du joueur
-    echo '<p>' . $joueur['prenom'] . ' ' . $joueur['nom'] . '</p>';
+
+    $condition = 
+      $joueur['numero_maillot'] > 0 && 
+      $joueur['numero_maillot'] < 1000;
+
+    if ($condition) {
+      echo '<p>' . $joueur['prenom'] . ' ' . $joueur['nom'] . ' (' . $joueur['numero_maillot'] . ')';
+    } else {
+      echo '<p>' . $joueur['prenom'] . ' ' . $joueur['nom'] . '';
+    }
+
+    echo ' <a class="btn btn-primary btn-xs" href="updatePlayer.php?id='.$joueur['id'].'">Modifier</a>';
+
+    echo ' | ';
+
+    echo '<a class="btn btn-danger btn-xs" href="deletePlayer.php?id='.$joueur['id'].'">Supprimer</a>';
+
+    echo '</p>';
+
+
    }
 ?>
 
