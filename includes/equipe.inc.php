@@ -8,6 +8,17 @@ function getTeams() {
     return $query->fetchAll();
 }
 
+function getTeamById($id) {
+    $db = connect();
+    $query = $db->prepare(
+        'SELECT * FROM equipe WHERE id = :id'
+    );
+    $query->execute(array(
+        ':id' => $id
+    ));
+    return $query->fetch();
+}
+
 function selectFormat($teams) {
     $output = '<select name="equipe">';
     foreach ($teams as $team) {

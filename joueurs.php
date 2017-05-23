@@ -1,5 +1,6 @@
 <?php
 include 'includes/util.inc.php';
+include 'includes/equipe.inc.php';
 include 'includes/header.php';
 include 'includes/menu.php';
 
@@ -53,6 +54,14 @@ $query->execute();
       $output .= '<p>' . $joueur['prenom'] . ' ' . $joueur['nom'] . ' (' . $joueur['numero_maillot'] . ')';
     } else {
       $output .= '<p>' . $joueur['prenom'] . ' ' . $joueur['nom'] . '';
+    }
+
+    $team = getTeamById($joueur['equipe']);
+    if (!$team) { // $team == false
+      $output .= ', SCF';
+    } else {
+      $output .= ', equipe : ' . $team['nom'];
+      //$output .= '<img width="50" src="img/logo/'.$team['nom'].'.png">';
     }
 
     $output .= ' <a class="btn btn-primary btn-xs" href="updatePlayer.php?id='.$joueur['id'].'">Modifier</a>';
