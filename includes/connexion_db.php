@@ -7,5 +7,4 @@ function connect() {
     return $db;
 }
 
-
 ?>

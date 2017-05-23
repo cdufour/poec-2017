@@ -1,6 +1,7 @@
 <?php
-include 'includes/connexion_db.php'; // fournit connect();
+include_once 'includes/connexion_db.php'; // fournit connect();
 include 'includes/util.inc.php';
+include 'includes/equipe.inc.php';
 include 'includes/header.php';
 include 'includes/menu.php';
 
@@ -31,20 +32,24 @@ if (isset($_POST['input'])) {
     // si la connection n'existe pas, on DOIT l'initialiser avant l'étape de requête
     if (!isset($db)) $db = connect();
 
-    $query = $db->prepare('UPDATE joueur SET prenom = :prenom, nom = :nom, age = :age, numero_maillot = :numero_maillot WHERE id = :id');
+    $query = $db->prepare('
+        UPDATE joueur 
+        SET prenom = :prenom, nom = :nom, age = :age, numero_maillot = :numero_maillot, equipe = :equipe 
+        WHERE id = :id
+    ');
 
     $query->execute(array(
         ':prenom' =>            $_POST['prenom'],
         ':nom' =>               $_POST['nom'],
         ':age' =>               $_POST['age'],
         ':numero_maillot' =>    $_POST['numero_maillot'],
+        ':equipe' =>            $_POST['equipe'],
         ':id' =>                $_POST['id']
     ));
 
     // redirection vers la liste des joueurs
     header('location:joueurs.php');
 }
-
 
 
 ?>
@@ -82,12 +87,14 @@ if (isset($_POST['input'])) {
         ?>
     </select>
 
+    <br>
+    <label>Equipe</label>
+    <?php echo selectFormatWithOpt(getTeams(), $joueur['equipe']); ?>
+
     <input type="hidden" name="id" value="<?php echo $id ?>" />
 
     <input type="submit" name="input" value="Mettre à jour">
 </form>
 
-
-
-
 <?php include 'includes/footer.php'; ?>
+             

@@ -6,17 +6,11 @@ include 'includes/menu.php';
 if (isset($_GET['ageLimit'])) {
     $ageLimit = $_GET['ageLimit'];
 
-    // si l'utilisateur donne une valeur contenant plus de 2
-    // caractères, on force $ageLimit à recevoir la valeur 35
-    // par mesure de sécurité
     if (strlen($ageLimit) > 2) {
         $ageLimit = 35;
     }
 }
 
-
-// bibliothèque utilisée pour dialoguer à MySQL : PDO
-// connexion à la base de données
 $db = new PDO('mysql:host=localhost;dbname=formation-poec', 'root', '');
 
 if (isset($ageLimit)) {
@@ -25,20 +19,11 @@ if (isset($ageLimit)) {
      $query = $db->prepare('SELECT * FROM joueur');
 }
 
-// exécution de la requête
-$query->execute(); // execute() renvoie vrai si réussite
-
-
-//$joueurs = $query->fetchAll();
-
-// var_dump($data);
-// la function var_dump affiche la description détaillée (type et valeur)
-// de la variable fournie en entrée
+$query->execute();
 
 ?>
 
 <h1>Joueurs</h1>
-
 
 <div>
     <form>
@@ -54,39 +39,33 @@ $query->execute(); // execute() renvoie vrai si réussite
 </div>
 
 <?php
-   //foreach ($joueurs as $joueur) {
-    //echo '<p>' . $joueur['prenom'] . ' ' . $joueur['nom'] . '</p>';
-   //}
+  $output = '';
+  $i = 0;
 
-   // la méthode .fetch() renvoie sous forme d'un tableau php
-   // la prochaine ligne (row) sql non traitée
-   // les lignes sql déjà traitées (fetched) sont retirées de l'objet $query
-   // fetch() renvoie false quand toutes les lignes sql ont été traitées
-   while ($joueur = $query->fetch()) {
-    // à chaque itération la variable $joueur reçoit le résultat de fetch()
-    // c'est-à-dire un tableau associatif contenant les données du joueur
+  while ($joueur = $query->fetch()) {
+    $i++;
 
     $condition = 
       $joueur['numero_maillot'] > 0 && 
       $joueur['numero_maillot'] < 1000;
 
     if ($condition) {
-      echo '<p>' . $joueur['prenom'] . ' ' . $joueur['nom'] . ' (' . $joueur['numero_maillot'] . ')';
+      $output .= '<p>' . $joueur['prenom'] . ' ' . $joueur['nom'] . ' (' . $joueur['numero_maillot'] . ')';
     } else {
-      echo '<p>' . $joueur['prenom'] . ' ' . $joueur['nom'] . '';
+      $output .= '<p>' . $joueur['prenom'] . ' ' . $joueur['nom'] . '';
     }
 
-    echo ' <a class="btn btn-primary btn-xs" href="updatePlayer.php?id='.$joueur['id'].'">Modifier</a>';
+    $output .= ' <a class="btn btn-primary btn-xs" href="updatePlayer.php?id='.$joueur['id'].'">Modifier</a>';
 
-    echo ' | ';
+    $output .= ' | ';
 
-    echo '<a class="btn btn-danger btn-xs" href="deletePlayer.php?id='.$joueur['id'].'">Supprimer</a>';
+    $output .= '<a class="btn btn-danger btn-xs" href="deletePlayer.php?id='.$joueur['id'].'">Supprimer</a>';
 
-    echo '</p>';
-
-
+    $output .= '</p>';
    }
-?>
 
+   echo '<p>Nombre de résultats: ' . $i . '</p>';
+   echo $output;
+?>
 
 <?php include 'includes/footer.php'; ?>
