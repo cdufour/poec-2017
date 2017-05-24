@@ -40,7 +40,7 @@ $query->execute();
 </div>
 
 <?php
-  $output = '';
+  $output = '<div class="equipe">';
   $i = 0;
 
   while ($joueur = $query->fetch()) {
@@ -60,8 +60,9 @@ $query->execute();
     if (!$team) { // $team == false
       $output .= ', SCF';
     } else {
-      $output .= ', equipe : ' . $team['nom'];
-      //$output .= '<img width="50" src="img/logo/'.$team['nom'].'.png">';
+      //$output .= ', equipe : ' . $team['nom'];
+      $output .= '<img src="'.$team['logo'].'">';
+
     }
 
     $output .= ' <a class="btn btn-primary btn-xs" href="updatePlayer.php?id='.$joueur['id'].'">Modifier</a>';
@@ -73,6 +74,7 @@ $query->execute();
     $output .= '</p>';
    }
 
+   $output .= '</div>';
    echo '<p>Nombre de résultats: ' . $i . '</p>';
    echo $output;
 ?>
