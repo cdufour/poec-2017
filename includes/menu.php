@@ -1,4 +1,5 @@
 <?php
+include_once 'access.inc.php';
 $menus = [
     ['href' => 'index.php', 'label' => 'Accueil'],
     ['href' => 'variables.php', 'label' => 'Variables'],
@@ -20,5 +21,10 @@ $menus = [
             </a>
         </li>
     <?php endforeach ?>
+        <?php
+        if (isLogged()) {
+            echo '<li><a href="logout.php">Déconnexion</a></li>';
+        }
+        ?>
     </ul>
 </nav>

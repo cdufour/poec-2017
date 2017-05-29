@@ -1,14 +1,14 @@
 <?php
-    $title = "Formation PHP Aston";
-    $connected = true;
-    include 'includes/header.php';
-    include 'includes/menu.php';
+include 'includes/header.php';
+include 'includes/menu.php';
+$title = "Formation PHP Aston";
+$connected = true;
 ?>
 <h1><?php echo $title; ?></h1>
 
 <!-- Formulaire de connexion -->
 <?php if ($connected): ?>
-<form action="post.php" method="POST">
+<form action="login.php" method="POST">
     <label>Email: </label>
     <input name="email" type="email" placeholder="Tapez votre email">
 

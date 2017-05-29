@@ -4,15 +4,25 @@ include 'includes/equipe.inc.php';
 include 'includes/header.php';
 include 'includes/menu.php';
 
-if (isset($_POST['input'])) {
+//var_dump($_SESSION);
+
+// Note concernant l'upload
+// Pour prendre en compte des fichiers > 2M
+// Modifier le fichier php.ini : C:\wamp64\bin\php\<php_version>
+// upload_max_filesize = 2M
+
+if (isset($_POST['input']) && isset($_FILES)) {
+
+    $extension = substr($_FILES['logo']['name'], -4);
+    $conditions = 
+        $_FILES['logo']['size'] < 500000 &&
+        isFormatAllowed($extension);
 
     // upload du fichier
-    if ($_FILES['logo']['size'] < 500000) {
-
-        $extension = substr($_FILES['logo']['name'], -4);
+    if ($conditions) {
         $src = $_FILES['logo']['tmp_name'];
         //$dest = 'img/logo/' . $_FILES['logo']['name'];
-        $dest = 'img/logo/' . $_POST['nom'] . $extension;
+        $dest = 'img/logo/' . rightFormat($_POST['nom']) . $extension;
 
         // déplacer le fichier de la zone temporaire vers son 
         // emplacement "définitif" sur le serveur
@@ -30,29 +40,27 @@ if (isset($_POST['input'])) {
         }
 
     } else {
-        echo '<p>Fichier trop lourd</p>';
+        echo '<p>Format non autorisé ou fichier trop lourd</p>';
     }
 }
 ?>
 
-<h1>Ajouter une équipe</h1>
-<!-- enctype="multipart/form-data" pour envoyer des fichiers -->
-<form method="POST" enctype="multipart/form-data">
-    <label>Nom</label>
-    <input type="text" name="nom">
+<?php 
 
-    <label>Entraineur</label>
-    <input type="text" name="entraineur">
+//if (isset($_SESSION['logged'])) {
+if (isset($_SESSION['user'])) {
+    
+    if ($_SESSION['user']['role'] == 'admin') {
+        include 'includes/forms/addTeam.inc.php';
+    } else {
+        echop('Droits insuffisants');
+    }
+    
+} else {
+    echop('Vous devez être connecté pour accéder à cette ressource');
+}
 
-    <label>Couleurs</label>
-    <input type="text" name="couleurs">
-
-    <br>
-    <label>Logo</label>
-    <input type="file" name="logo">
-
-    <input type="submit" name="input">
-</form>
+?>
 
 
 <?php include 'includes/footer.php'; ?>
