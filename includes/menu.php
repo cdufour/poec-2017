@@ -1,5 +1,5 @@
 <?php
-include_once 'access.inc.php';
+include_once 'includes/access.inc.php';
 $menus = [
     ['href' => 'index.php', 'label' => 'Accueil'],
     ['href' => 'variables.php', 'label' => 'Variables'],
