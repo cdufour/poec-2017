@@ -1,3 +1,7 @@
 table.equipe img, div.equipe img {
     height: 40px;
 }
+
+#ageHeader:hover {
+    cursor: pointer;
+}
