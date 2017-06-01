@@ -2,6 +2,15 @@ table.equipe img, div.equipe img {
     height: 40px;
 }
 
-#ageHeader:hover {
+#ageHeader:hover, #nomHeader:hover{
     cursor: pointer;
+}
+
+.oldest {
+    color: orange;
+    font-weight: bold
+}
+
+#formPlayer {
+    display: none;
 }
