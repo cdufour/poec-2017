@@ -93,6 +93,39 @@ function getAges(players) {
     return ages; // on retourne le tableau des ages
 }
 
+function getFormValues(form) {
+    // récupère tous les inputs placées 
+    // dans le formulaire fourni en entrée
+    var inputs      = form.children('input');
+
+    // récupère la valeur du premier input trouvé (nom)
+    var nom         = inputs.eq(0).val();
+
+    var prenom      = inputs.eq(1).val();
+    var age         = inputs.eq(2).val();
+
+    // renvoie un tableau de deux balises select
+    var selects     = form.children('select');
+
+    var maillot     = selects.eq(0).val();
+    var equipe      = selects.eq(1).val();
+
+    //console.log(nom + ' ' + prenom + ' ' + maillot);
+
+    // création d'un objet values 
+    // permettant de stocker toutes les valeurs
+    // à transmettre au serveur
+    var values = {
+        nom: nom,
+        prenom: prenom,
+        age: age,
+        maillot: maillot,
+        equipe: equipe
+    };
+
+    return values;
+}
+
 getPlayers(); // appel de la fonction au chargement du script
 
 $('#selectAge').on('change', function() {
@@ -133,10 +166,36 @@ $(document).on('click', '#nomHeader', function() {
 });
 
 $('#displayFormPlayer').on('click', function() {
+    var text = ' le formulaire pour ajouter un joueur';
     //$('#formPlayer').toggle();
-    $(this).next().toggle(); // ciblage relatif
+    var form = $(this).next(); // ciblage relatif
+    form.toggle(); 
+
+    // changer le texte du lien en fonction de la 
+    // visibilité du formulaire
+    var status = form.css('display');
+    if (status == 'none') {
+        $(this).text('Afficher' + text);
+    } else {
+        $(this).text('Masquer' + text);
+    }
 });
 
+
+
+$('#formPlayer button').on('click', function() {
+    var form = $('#formPlayer');
+
+    // création d'un objet player à partir des valeurs
+    // récupérées dans le formulaire
+    var player = getFormValues(form);
+
+    // requête ajax en post
+    var url = 'http://localhost/projet/php/ajaxAddPlayer.php';
+    $.post(url, player, function(data) {
+        console.log(data);
+    });
+});
 
 
 // Lodash: exemples
