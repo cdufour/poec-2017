@@ -1,3 +1,4 @@
+//*** Variables globales ***
 // source de données globale (toutes les fonctions y ont accès)
 var players = null;
 var ageAsc = false; // booléen permet de savoir si les joueurs
@@ -5,6 +6,10 @@ var ageAsc = false; // booléen permet de savoir si les joueurs
 var nomAsc = true;
 var filterAge = null; // au départ, aucun filtre sur l'âge
 
+//******************************
+
+
+//*** Fonctions ****
 function getPlayers() {
     var url = 'http://localhost/projet/php/ajax2.php';
 
@@ -126,14 +131,33 @@ function getFormValues(form) {
     return values;
 }
 
-getPlayers(); // appel de la fonction au chargement du script
+function checkValues(player) {
+    // player est un objet
+    var conditions =
+        player.nom.length > 1 &&
+        player.prenom.length > 1 &&
+        player.age.length > 1;
 
+    return conditions;
+}
+
+function clearMessage(timer) {
+    var message = $('#message');
+    setTimeout(function() {
+        // efface le texte situé dans l'élément #message ainsi que les classes
+        message.text('').removeClass();
+    }, timer);
+}
+
+// **********************************
+
+
+// *** Ecouteurs d'événement (eventListeners) ***
 $('#selectAge').on('change', function() {
     // .val() récupère la valeur de l'élément de formulaire (select)
     filterAge = $(this).val(); 
     hidePlayers(filterAge);
 });
-
 
 // Lorsque l'élément #ageHeader EXISTERA dans le dom, JS placera
 // un écouteur d'événement click dessus
@@ -181,8 +205,6 @@ $('#displayFormPlayer').on('click', function() {
     }
 });
 
-
-
 $('#formPlayer button').on('click', function() {
     var form = $('#formPlayer');
 
@@ -190,25 +212,39 @@ $('#formPlayer button').on('click', function() {
     // récupérées dans le formulaire
     var player = getFormValues(form);
 
-    // requête ajax en post
-    var url = 'http://localhost/projet/php/ajaxAddPlayer.php';
-    $.post(url, player, function(data) {
-        console.log(data);
-    });
+    var check = checkValues(player);
+
+    if (check) {
+        // si conditions remplies => requête ajax en post
+        var url = 'http://localhost/projet/php/ajaxAddPlayer.php';
+        $.post(url, player, function(data) {
+        // si php a renvoyé 1 (requête sql éxécutée avec succès)
+            if (data == 1) {
+                getPlayers(); // recharge la liste des joueurs
+                $('#message')
+                    .text('L\'enregisrement a réussi')
+                    .removeClass()
+                    .addClass('bg-success text-success');
+            } else {
+                $('#message')
+                    .text('L\'enregisrement a échoué')
+                    .removeClass()
+                    .addClass('bg-danger text-danger');
+            }
+        });
+
+    } else {
+        // afficher message d'erreur si les conditions de validation
+        // non remplies
+        $('#message')
+            .text('Formulaire non valide')
+            .removeClass()
+            .addClass('bg-danger text-danger');
+    }
+    clearMessage(8000);
 });
 
+// ************************************
 
-// Lodash: exemples
-/*
-var notes = [7, 56, 12, 74, 30];
-
-var max = _.max(notes);
-var min = _.min(notes);
-
-console.log(max);
-console.log(min);
-*/
-
-
-
-
+// chargement de la liste des joueurs
+getPlayers(); // appel de la fonction au chargement du script

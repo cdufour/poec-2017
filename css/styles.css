@@ -14,3 +14,7 @@ table.equipe img, div.equipe img {
 #formPlayer {
     display: none;
 }
+
+#message {
+    padding: 10px;
+}
