@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="introApp">
+<head>
+    <title>Angularjs Intro</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+</head>
+<body>
+    <h1>Angularjs Intro</h1>
+
+    <div ng-controller="mainCtrl">
+        
+        <h2>{{message}}</h2>
+
+        <ul>
+            <li ng-repeat="joueur in joueurs">
+            {{joueur.name}} ({{joueur.age}} ans)
+            </li>
+        </ul>
+
+        <table class="table table-striped">
+            <tr ng-repeat="joueur in joueurs">
+                <td>{{joueur.name}}</td>
+                <td>{{joueur.age}}</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
