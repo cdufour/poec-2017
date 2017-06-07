@@ -3,6 +3,7 @@
     border: 1px solid black;
     margin: 10px 0 10px 0;
     padding: 20px;
+    display: none;
 }
 
 .flag {
