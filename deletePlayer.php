@@ -16,8 +16,18 @@ if (isset($_GET['id'])) {
         ':id' => $id
     ));
 
-    // redirection vers liste joueurs
-    header('location:joueurs.php');
+
+    if (isset($_GET['ajax'])) {
+        // requête reçue en http ajax
+        echo "Le joueur d'id " . $id . " a été supprimé";
+    } else {
+        // requête reçue en http "normal"
+
+        // redirection vers liste joueurs
+        header('location:joueurs.php');
+
+    }
+
 }
 
 ?>

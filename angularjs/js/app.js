@@ -18,11 +18,24 @@ app.controller('mainCtrl', function($scope, $http) {
         {name: 'PSG'}
     ];
 
-    // requête ajax via le service $http
-    var url = "http://localhost/projet/php/ajax2.php";
-    $http.get(url).then(function(res) {
-        $scope.giocatori = res.data;
-    });
+    function getPlayers() {
+        // requête ajax via le service $http
+        var url = "http://localhost/projet/php/ajax2.php";
+        $http.get(url).then(function(res) {
+            $scope.giocatori = res.data;
+
+            // modification de la source de données en 
+            // fonction d'une condition
+            // si joueur sans équipe, on modifie sa propriété "equipe_nom"
+            /*
+            $scope.giocatori.forEach(function(joueur) {
+                if (joueur.equipe == 0) {
+                    joueur.equipe_nom = "sans équipe"
+                }
+            });
+            */
+        });  
+    }
 
     $scope.teams = equipes; // nous exposons les équipes :
     // elles deviennent accessibles à la vue via le $scope
@@ -41,6 +54,14 @@ app.controller('mainCtrl', function($scope, $http) {
         var player_id = this.g.id;
 
         // requête ajax pour supprimer le joueur identifié
+        var url = "http://localhost/projet/php/deletePlayer.php?ajax=true&id=" + player_id;
+        $http.get(url).then(function(res) {
+            // rechargement des joueurs
+            getPlayers();
+        });
         
     };
+
+    // chargement des joueurs
+    getPlayers();
 });
