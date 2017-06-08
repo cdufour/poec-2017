@@ -2,25 +2,52 @@
 <html ng-app="introApp">
 <head>
     <title>Angularjs Intro</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <style>
+        th {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <h1>Angularjs Intro</h1>
 
     <div ng-controller="mainCtrl">
         
-        <h2>{{message}}</h2>
+        <!-- filtres -->
+        <div>
+            <!-- ng-model surveille la valeur d'un input et la range dans le $scope -->
+            <input ng-model="search" type="text" placeholder="Recherche">
+            <select ng-model="selectedTeam">
+                <option ng-repeat="team in teams">{{team.name}}</option>
+            </select>
+        </div>
 
-        <ul>
-            <li ng-repeat="joueur in joueurs">
-            {{joueur.name}} ({{joueur.age}} ans)
-            </li>
-        </ul>
-
+        <div ng-hide="true">
+            <button ng-click="nb_clicks = nb_clicks + 1">
+            Click
+            </button> {{nb_clicks}}
+        </div>
+        
         <table class="table table-striped">
-            <tr ng-repeat="joueur in joueurs">
-                <td>{{joueur.name}}</td>
-                <td>{{joueur.age}}</td>
+            <tr>
+                <th ng-click="changeOrder('nom')">Nom</th>
+                <th ng-click="changeOrder('prenom')">Prénom</th>
+                <th ng-click="changeOrder('age')">Age</th>
+                <th ng-click="changeOrder('numero_maillot')">Numéro</th>
+                <th ng-click="changeOrder('equipe_nom')">Equipe</th>
+                <th>Actions</th>
+            </tr>
+            <tr ng-repeat="g in giocatori | filter:search | filter:selectedTeam | orderBy:orderKey:reverse">
+                <td>{{g.nom}}</td>
+                <td>{{g.prenom}}</td>
+                <td>{{g.age}}</td>
+                <td>{{g.numero_maillot}}</td>
+                <td>{{g.equipe_nom}}</td>
+                <td>
+                    <button ng-click="deletePlayer()" class="btn btn-danger btn-xs">Supprimer</button>
+                </td>
             </tr>
         </table>
 

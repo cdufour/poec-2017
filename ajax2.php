@@ -14,7 +14,7 @@ $db = connect();
 
 // LEFT JOIN : jointure externe, ouverte. Inclut les lignes n'ayant pas de correspondance dans l'autre table (Colonnes manquantes remplies par NULL)
 $query = $db->prepare('
-    SELECT joueur.nom, joueur.prenom, joueur.age, joueur.equipe, joueur.numero_maillot, equipe.nom AS equipe_nom 
+    SELECT joueur.id, joueur.nom, joueur.prenom, joueur.age, joueur.equipe, joueur.numero_maillot, equipe.nom AS equipe_nom 
     FROM joueur
     LEFT JOIN equipe
     ON joueur.equipe = equipe.id
