@@ -6,3 +6,13 @@ joueurs.php sauf si aucun numéro n'a été défini (éviter d'afficher "(0)")
 
 Afficher le formulaire d'ajout d'un joueur uniquement pour
 les rôles admin et client. Le formulaire ne sera pas affiché pour un utilisateur non loggué ou ayant un autre rôle que ceux autorisés.
+
+
+/* Jour 12 */
+1/ Modéliser en php une équipe de foot selon les caractéristiques suivantes:
+- nom
+- année de création
+- entraineur
+- couleur
+
+2/ Instancier 2 équipes à partir de la classe modélisée (dans le fichier index.php)
