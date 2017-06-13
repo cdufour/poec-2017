@@ -24,6 +24,14 @@ class PlayerManager
         return $query; // renvoie le retour SQL sans fetch
     }
 
+
+    function getListFetched()
+    {
+        $query = $this->db->prepare('SELECT * FROM joueur');
+        $query->execute();
+        return $query->fetchAll(); // renvoie un tableau associatif
+    }
+
 }
 
 ?>
