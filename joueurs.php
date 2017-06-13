@@ -1,4 +1,6 @@
 <?php
+include 'poo/classes/PlayerManager.class.php';
+
 include 'includes/util.inc.php';
 include 'includes/equipe.inc.php';
 include 'includes/header.php';
@@ -12,7 +14,7 @@ if (isset($_GET['ageLimit'])) {
     }
 }
 
-$db = new PDO('mysql:host=localhost;dbname=formation-poec', 'root', '');
+/*$db = new PDO('mysql:host=localhost;dbname=formation-poec', 'root', '');
 
 if (isset($ageLimit)) {
     $query = $db->prepare('SELECT * FROM joueur WHERE age < ' . $ageLimit);
@@ -20,7 +22,15 @@ if (isset($ageLimit)) {
      $query = $db->prepare('SELECT * FROM joueur');
 }
 
-$query->execute();
+$query->execute();*/
+
+$pm = new PlayerManager();
+
+if (isset($ageLimit)) {
+  $query = $pm->getListFilteredByAge($ageLimit);
+} else {
+  $query = $pm->getList();
+}
 
 ?>
 

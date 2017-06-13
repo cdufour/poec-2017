@@ -3,6 +3,7 @@ include 'classes/Client.class.php';
 include 'classes/Equipe.class.php';
 
 class Joueur {
+    // propriétés
     public $nom = 'Zidane';
     public $prenom = 'Enzo';
     public $age;        
@@ -53,7 +54,9 @@ echo $client1->nom;
 echo $client1->prenom;
 echo $client1->nb_cb;
 
-var_dump($client1->isCbValid());
+if ($client1->isCbValid()) {
+    echo "Le numéro de CB du client 1 est valide";
+}
 
 // test
 /*
@@ -97,7 +100,7 @@ $equipe1->joueContre('Benfica', 'Paris', '14/02/2005');
 $equipe1->joueContre('Porto', 'Paris', '15/02/2005');
 $equipe1->joueContre('Madrid', 'Cardiff', '03/06/2017');
 
-var_dump($equipe1);
+//var_dump($equipe1);
 
 ?>
 
