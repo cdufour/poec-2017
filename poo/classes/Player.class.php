@@ -4,6 +4,7 @@ class Player
 {
     public $db;
 
+    public $id; // nécessaire pour les opérations de mise à jour et de suppression
     public $nom;
     public $prenom;
     public $age;
@@ -14,6 +15,11 @@ class Player
     {
         // 1) connexion à la base de données
         $this->db = new PDO('mysql:host=localhost;dbname=formation-poec', 'root', '');
+
+        // si l'identifiant du joueur fait partie du tableau de données passé en entrée du constructeur, on l'utilise pour hydrateur la propriété id de l'objet
+        if (isset($data['id'])) {
+            $this->id = $data['id'];
+        }
 
         $this->nom              = $data['nom'];
         $this->prenom           = $data['prenom'];
@@ -35,6 +41,24 @@ class Player
             ':age'              => $this->age,
             ':numero_maillot'   => $this->numero_maillot,
             ':equipe'           => $this->equipe
+        ));
+    }
+
+    function update()
+    {
+        $query = $this->db->prepare('
+            UPDATE joueur 
+            SET prenom = :prenom, nom = :nom, age = :age, numero_maillot = :numero_maillot, equipe = :equipe 
+            WHERE id = :id
+        ');
+
+        return $query->execute(array(
+            ':prenom' =>            $this->prenom,
+            ':nom' =>               $this->nom,
+            ':age' =>               $this->age,
+            ':numero_maillot' =>    $this->numero_maillot,
+            ':equipe' =>            $this->equipe,
+            ':id' =>                $this->id
         ));
     }
 }
