@@ -20,7 +20,9 @@ function getTeamById($id) {
 }
 
 function selectFormat($teams) {
-    $output = '<select name="equipe">';
+    // ng-model permet à Angular de "surveiller"
+    // la valeur sélectionnée dans le menu de sélection
+    $output = '<select ng-model="team.equipe" name="equipe">';
     $output .= '<option value="0">Sans équipe</option>';
     foreach ($teams as $team) {
         $output .= '<option value="'.$team['id'].'">'.$team['nom'].'</option>';

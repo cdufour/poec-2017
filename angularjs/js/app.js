@@ -11,6 +11,8 @@ app.controller('mainCtrl', function($scope, $http) {
     $scope.reverse = false; // par défaut, tri croissant (pas d'inversion)
     $scope.message = "coucou"; // ajout d'une propriété "message"
     // à l'objet $scope (espace d'échange entre la vue et le controller)
+    $scope.maillot_range = []; // tableau destiné à alimenter le menu 
+    //select  dans le formulaire d'ajout d'un joueur
 
     // variable equipes non accessible à la vue
     var equipes = [
@@ -39,12 +41,27 @@ app.controller('mainCtrl', function($scope, $http) {
         });  
     }
 
+    function buildNumeroList() {
+        for (var i=1; i<1000; i++) {
+            $scope.maillot_range.push(i);
+        }
+    }
+
     $scope.teams = equipes; // nous exposons les équipes :
     // elles deviennent accessibles à la vue via le $scope
 
     $scope.changeOrder = function(key) {
         $scope.orderKey = key;
         $scope.reverse = !$scope.reverse; // on inverse l'ordre du tri
+    };
+
+    $scope.savePlayer = function() {
+        // requête ajax pour ajouter un joueur
+        var url = url_server;
+        $http.post(url, {team: $scope.team}).then(function(res) {
+            // rechargement des joueurs
+            getPlayers();
+        });
     };
 
     $scope.deletePlayer = function() {
@@ -56,7 +73,7 @@ app.controller('mainCtrl', function($scope, $http) {
         var player_id = this.g.id;
 
         // requête ajax pour supprimer le joueur identifié
-        var url = "http://localhost/projet/php/deletePlayer.php?ajax=true&id=" + player_id;
+        var url = url_server + "?action=delete&id=" + player_id;
         $http.get(url).then(function(res) {
             // rechargement des joueurs
             getPlayers();
@@ -66,4 +83,8 @@ app.controller('mainCtrl', function($scope, $http) {
 
     // chargement des joueurs
     getPlayers();
+
+    // construction de la liste des numéros de maillot
+    buildNumeroList();
+
 });

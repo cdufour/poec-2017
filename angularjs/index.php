@@ -15,12 +15,34 @@
     </style>
 </head>
 <body>
-    <?php include '../includes/menu.php' ?>
+    <?php 
+        include '../includes/menu.php';
+        include '../includes/equipe.inc.php';
+    ?>
 
     <h1>Angularjs Intro</h1>
 
     <div ng-controller="mainCtrl">
         
+        <!-- formulaire d'ajout/mise à jour d'un joueur -->
+        <div class="well">
+            <input ng-model="team.nom" type="text" placeholder="Nom">
+            <input ng-model="team.prenom" type="text" placeholder="Prénom">
+            <input ng-model="team.age" type="text" placeholder="Age">
+
+            <label>Numéro</label>
+            <select ng-model="team.numero_maillot">
+                <option ng-repeat="n in maillot_range">{{n}}</option>
+            </select>
+
+            <label>Equipe</label>
+            <?php echo selectFormat(getTeams()); ?>
+
+            <button ng-click="savePlayer()" class="btn btn-primary btn-xs">Enregistrer</button>
+            <span id="message"></span>
+        </div>
+
+
         <!-- filtres -->
         <div>
             <!-- ng-model surveille la valeur d'un input et la range dans le $scope -->
