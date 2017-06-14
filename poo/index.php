@@ -52,11 +52,14 @@ $j5 = creeJoueur();
 $client1 = new Client('Langlais', 'Sophie', '4913 2145 8899 6330');
 echo $client1->nom;
 echo $client1->prenom;
-echo $client1->nb_cb;
+//echo $client1->nb_cb;
 
+// on peut appeler isCbValid() depuis l'extérieur de la classe car cette
+// méthode est publique
 if ($client1->isCbValid()) {
     echo "Le numéro de CB du client 1 est valide";
 }
+
 
 // test
 /*
@@ -124,4 +127,17 @@ $equipe1->joueContre('Madrid', 'Cardiff', '03/06/2017');
 
     identite($j5); // appel à la function identite en style procédural
 
+
+
+    // visibilité des membres d'une classe en POO
+
+    $alban = new Client("CARROUE", "Alban", "1111222233334444");
+    echo '<br>' . $alban->nom . ' : ' . $alban->getNbCb();
+
+    $alban->setNbCb("1234"); // Mise à jour non effecutée car
+    // la valeur passée en entrée ne correspond pas au critère de validation (longueur 16) imposé par la méthode privée isCbOk() utilisée en interne par le setter setNbCb()
+
+    $alban->setNbCb("1234123412341234"); // ici, la modification est autorisée par la méthode privée isCbOk()
+    
+    echo '<br>' . $alban->nom . ' : ' . $alban->getNbCb();
 ?>

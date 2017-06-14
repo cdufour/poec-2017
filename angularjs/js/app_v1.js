@@ -4,8 +4,6 @@
 var app = angular.module('introApp', []);
 
 app.controller('mainCtrl', function($scope, $http) {
-    var url_server = "http://localhost/projet/php/poo/ajax.php";
-
     $scope.nb_clicks = 0;
     $scope.orderKey = "age"; // critère de tri initial
     $scope.reverse = false; // par défaut, tri croissant (pas d'inversion)
@@ -22,7 +20,7 @@ app.controller('mainCtrl', function($scope, $http) {
 
     function getPlayers() {
         // requête ajax via le service $http
-        var url = url_server + "?action=list";
+        var url = "http://localhost/projet/php/ajax2.php";
         $http.get(url).then(function(res) {
             $scope.giocatori = res.data;
 

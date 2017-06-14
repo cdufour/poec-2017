@@ -23,12 +23,16 @@ $player = new Player($donnees);
 $player2 = $pm->getById(4);
 $player2->numero_maillot = 26;
 
-if ($player2->update()) {
+/*if ($player2->update()) {
     echo 'Joueur mis à jour';
 } else {
-    echo 'Albooooooooooooooooooooooooooooo';
-}
+    echo 'Albooooooooooooooooooooooooooooooooo';
+}*/
 
-
+/*if ($pm->getById(28)->delete()) {
+    echo 'Joueur supprimé';
+} else {
+    echo 'Albooooooooooooooooooooooooooooooooo'; 
+}*/
 
 ?>

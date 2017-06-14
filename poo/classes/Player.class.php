@@ -48,17 +48,30 @@ class Player
     {
         $query = $this->db->prepare('
             UPDATE joueur 
-            SET prenom = :prenom, nom = :nom, age = :age, numero_maillot = :numero_maillot, equipe = :equipe 
+            SET prenom = :prenom, 
+                nom = :nom, 
+                age = :age, 
+                numero_maillot = :numero_maillot, 
+                equipe = :equipe 
             WHERE id = :id
         ');
 
         return $query->execute(array(
-            ':prenom' =>            $this->prenom,
-            ':nom' =>               $this->nom,
-            ':age' =>               $this->age,
+            ':prenom'         =>    $this->prenom,
+            ':nom'            =>    $this->nom,
+            ':age'            =>    $this->age,
             ':numero_maillot' =>    $this->numero_maillot,
-            ':equipe' =>            $this->equipe,
-            ':id' =>                $this->id
+            ':equipe'         =>    $this->equipe,
+            ':id'             =>    $this->id
+        ));
+    }
+
+    function delete() 
+    {
+        $query = $this->db->prepare('DELETE FROM joueur WHERE id = :id');
+        
+        return $query->execute(array(
+            ':id' => $this->id
         ));
     }
 }
