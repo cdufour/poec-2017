@@ -26,20 +26,24 @@
         
         <!-- formulaire d'ajout/mise à jour d'un joueur -->
         <div class="well">
-            <input ng-model="team.nom" type="text" placeholder="Nom">
-            <input ng-model="team.prenom" type="text" placeholder="Prénom">
-            <input ng-model="team.age" type="text" placeholder="Age">
+            <input ng-model="player.nom" type="text" placeholder="Nom">
+            <input ng-model="player.prenom" type="text" placeholder="Prénom">
+            <input ng-model="player.age" type="text" placeholder="Age">
 
             <label>Numéro</label>
-            <select ng-model="team.numero_maillot">
+            <select ng-model="player.numero_maillot">
                 <option ng-repeat="n in maillot_range">{{n}}</option>
             </select>
 
             <label>Equipe</label>
             <?php echo selectFormat(getTeams()); ?>
 
-            <button ng-click="savePlayer()" class="btn btn-primary btn-xs">Enregistrer</button>
-            <span id="message"></span>
+            <button ng-click="savePlayer()" class="btn btn-primary btn-xs">
+                <span ng-if="!updateMode">Ajouter</span>
+                <span ng-if="updateMode">Mettre à jour</span>
+            </button>
+            <button ng-click="clearForm()" class="btn btn-default btn-xs">Effacer</button>
+            <span id="message"></span> 
         </div>
 
 
@@ -86,7 +90,12 @@
                 </td>
                 <td><img ng-src="../{{g.equipe_logo}}"></td>
                 <td>
-                    <button ng-click="deletePlayer()" class="btn btn-danger btn-xs">Supprimer</button>
+                    <button ng-click="editPlayer()" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button ng-click="deletePlayer()" class="btn btn-danger btn-xs">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
                 </td>
             </tr>
         </table>

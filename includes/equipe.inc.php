@@ -3,7 +3,7 @@ include_once 'connexion_db.php';
 
 function getTeams() {
     $db = connect();
-    $query = $db->prepare('SELECT * FROM equipe');
+    $query = $db->prepare('SELECT * FROM equipe ORDER BY nom ASC');
     $query->execute();
     return $query->fetchAll();
 }
@@ -22,7 +22,7 @@ function getTeamById($id) {
 function selectFormat($teams) {
     // ng-model permet à Angular de "surveiller"
     // la valeur sélectionnée dans le menu de sélection
-    $output = '<select ng-model="team.equipe" name="equipe">';
+    $output = '<select ng-model="player.equipe" name="equipe">';
     $output .= '<option value="0">Sans équipe</option>';
     foreach ($teams as $team) {
         $output .= '<option value="'.$team['id'].'">'.$team['nom'].'</option>';
