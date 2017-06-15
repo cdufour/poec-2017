@@ -23,9 +23,13 @@
     <h1>Angularjs Intro</h1>
 
     <div ng-controller="mainCtrl">
-        
+        <!-- checkbox pour affichage du formulaire -->
+        <input type="checkbox" ng-model="visibleForm">
+        <span ng-if="!visibleForm">Afficher</span>
+        <span ng-if="visibleForm">Masquer</span> le formulaire
+
         <!-- formulaire d'ajout/mise à jour d'un joueur -->
-        <div class="well">
+        <div ng-show="visibleForm" class="well">
             <input ng-model="player.nom" type="text" placeholder="Nom">
             <input ng-model="player.prenom" type="text" placeholder="Prénom">
             <input ng-model="player.age" type="text" placeholder="Age">
@@ -52,6 +56,7 @@
             <!-- ng-model surveille la valeur d'un input et la range dans le $scope -->
             <input ng-model="search" type="text" placeholder="Recherche">
             <select ng-model="selectedTeam">
+                <option value="">Toutes les équipes</option>
                 <option ng-repeat="team in teams">{{team.name}}</option>
             </select>
         </div>

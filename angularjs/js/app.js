@@ -10,7 +10,7 @@ app.controller('mainCtrl', function($scope, $http) {
     // si le formulaire doit être géré en mode insertion ou bien
     // en mode mise à jour
     $scope.updateMode = false; // mode insertion par défaut
-
+    $scope.visibleForm = false; // formulaire masqué par défaut
     $scope.nb_clicks = 0;
     $scope.orderKey = "age"; // critère de tri initial
     $scope.reverse = false; // par défaut, tri croissant (pas d'inversion)
@@ -88,6 +88,7 @@ app.controller('mainCtrl', function($scope, $http) {
     $scope.editPlayer = function() {
         $scope.player = this.g;
         $scope.updateMode = true;
+        $scope.visibleForm = true;
     };
 
     $scope.deletePlayer = function() {

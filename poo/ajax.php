@@ -38,17 +38,26 @@ if ($req_method == 'GET') { // requête en GET
     $data = json_decode(file_get_contents('php://input'), $assoc = true);
 
     // $data['player'] au lieu de $data->player
-    $player = new Player($data['player']); 
-    if ($player->save()) {
-        echo 'joueur enregistré';
+    $player = new Player($data['player']);
+
+    if ($player->id) {
+        // l'id est défini => mode mise à jour
+        if ($player->update()) {
+            echo 'joueur mis à jour';
+        } else {
+            echo 'La mise à jour a échoué';
+        }
     } else {
-        echo 'L\'enregisrement a échoué';
+        // aucun id défini => mode insertion
+        if ($player->save()) {
+            echo 'joueur enregistré';
+        } else {
+            echo 'L\'enregisrement a échoué';
+        }
     }
 
 } else {
     echo 'Méthode HTTP non traitée';
 }
-
-
 
 ?>
