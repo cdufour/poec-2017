@@ -7,9 +7,11 @@ Créer une application permettant:
 
 Structure d'un proverbe:
 - id, integer
-- auteur, varchar
+- origine, varchar
 - corps, text
 - catégorie, varchar
+
+Si l'origine (pays, auteur, etc.) n'est pas connue, on affichera "inconnue".
 
 Créer une page client (index.php), contenant un bouton "Charger un proverbe".
 Au clic sur le bouton, un proverbe sera chargé par requête ajax et affiché dans le DOM.
