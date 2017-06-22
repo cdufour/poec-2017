@@ -1,8 +1,10 @@
 *** ProverbApp ***
 
 Créer une application permettant:
+côté back
 - d'enregistrer des proverbes dans une base de données.
 - de supprimer un proverbe
+côté front
 - d'afficher un proverbe par requête ajax depuis une page client
 
 Structure d'un proverbe:
