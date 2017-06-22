@@ -88,12 +88,12 @@
 
                 <td>{{g.prenom}}</td>
                 <td>{{g.age}}</td>
-                <td>{{g.numeroMaillot}}</td>
+                <td>{{g.numero_maillot}}</td>
                 <td>
-                    <span ng-if="g.equipe">{{g.equipe.nom}}</span>
-                    <span ng-if="!g.equipe">Pole Emploi</span>
+                    <span ng-if="g.equipe != 0">{{g.equipe_nom}}</span>
+                    <span ng-if="g.equipe == 0">Pole Emploi</span>
                 </td>
-                <td></td>
+                <td><img ng-src="../{{g.equipe_logo}}"></td>
                 <td>
                     <button ng-click="editPlayer()" class="btn btn-default btn-xs">
                         <span class="glyphicon glyphicon-pencil"></span>

@@ -1,6 +1,7 @@
 <?php
 include 'classes/Client.class.php';
 include 'classes/Equipe.class.php';
+include 'classes/Footballer.class.php';
 
 class Joueur {
     // propriétés
@@ -140,4 +141,28 @@ $equipe1->joueContre('Madrid', 'Cardiff', '03/06/2017');
     $alban->setNbCb("1234123412341234"); // ici, la modification est autorisée par la méthode privée isCbOk()
     
     echo '<br>' . $alban->nom . ' : ' . $alban->getNbCb();
+
+
+    // test du mécanisme d'héritage en POO
+    $data = [
+        'nom'               => 'Verratti',
+        'prenom'            => 'Marco',
+        'age'               => 21,
+        'numero_maillot'    => 6,
+        'equipe'            => 3
+    ];
+    $f = new Footballer($data);
+    
+    $f->setSalaire(1200);
+
+    echo '<br>' . $f->nom . ' gagne ' . $f->getSalaire() . ' euros par minute';
+
+    /*
+    $blabla = new Footballer($data);
+    echo $blabla->getSalaire();
+
+    $blibli = new Player($data);
+    echo $blibli->getSalaire();
+    */
+
 ?>

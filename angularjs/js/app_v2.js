@@ -4,8 +4,7 @@
 var app = angular.module('introApp', []);
 
 app.controller('mainCtrl', function($scope, $http) {
-    // symfony écoute le port 8000
-    var url_server = "http://localhost:8000"; 
+    var url_server = "http://localhost/projet/php/poo/ajax.php";
 
     // $scope.updateMode est un indicateur permettant de savoir
     // si le formulaire doit être géré en mode insertion ou bien
@@ -30,9 +29,8 @@ app.controller('mainCtrl', function($scope, $http) {
 
     function getPlayers() {
         // requête ajax via le service $http
-        var url = url_server + "/json/players";
+        var url = url_server + "?action=list";
         $http.get(url).then(function(res) {
-            console.log(res.data);
             $scope.giocatori = res.data;
 
             // modification de la source de données en 
