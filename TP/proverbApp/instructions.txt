@@ -11,17 +11,17 @@ Structure d'un proverbe:
 - id, integer
 - origine, varchar
 - corps, text
-- catégorie, varchar
+- theme, varchar
 
 Si l'origine (pays, auteur, etc.) n'est pas connue, on affichera "inconnue".
 
-Créer une page client (index.php), contenant un bouton "Charger un proverbe".
+Créer une page client (index.php), contenant un bouton "Afficher un proverbe".
 Au clic sur le bouton, un proverbe sera chargé par requête ajax et affiché dans le DOM.
 
 Option: côté client, donner la possibilité de choisir le thème du proverbe via un menu déroulant.
 
 Contraintes: 
-- côté serveur: n'utiliser ni framework ni CMS. Utiliser php procédural et/ou objet
+- côté serveur: ni framework ni CMS. Utiliser php procédural/objet
 - côté client: liberté totale
 
 Temps estimé: moins de 5 heures.
