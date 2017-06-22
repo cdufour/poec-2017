@@ -16,7 +16,7 @@ Si l'origine (pays, auteur, etc.) n'est pas connue, on affichera "inconnue".
 Créer une page client (index.php), contenant un bouton "Charger un proverbe".
 Au clic sur le bouton, un proverbe sera chargé par requête ajax et affiché dans le DOM.
 
-Option: côté client, donner la possibilité de choisir le thème du poème via un menu déroulant.
+Option: côté client, donner la possibilité de choisir le thème du proverbe via un menu déroulant.
 
 Contraintes: 
 - côté serveur: n'utiliser ni framework ni CMS. Utiliser php procédural et/ou objet
